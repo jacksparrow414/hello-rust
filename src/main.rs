@@ -1,5 +1,6 @@
 use std::cmp::{min, max};
 fn main() {
+    println!("1 - 2 = {}", 1i32 - 2);
     let _X: i32 = 42;
     let pair: (char, i32) = ('a', 17);
     let a = (10, 20);
@@ -28,7 +29,7 @@ fn fair_die_roll() -> i32 {
 }
 /**
  * 函数写法
- * fn method(arg: type) -> returnType{}
+ * fn methodName(arg: type) -> returnType{}
  */
 fn fair_dice_roll_if(feeling_lucky: bool) -> i32 {
     if feeling_lucky {
@@ -37,6 +38,13 @@ fn fair_dice_roll_if(feeling_lucky: bool) -> i32 {
         4
     }
 }
+/**
+ * 泛型函数
+ * fn methodName<T>(arg: T) -> T {}
+ */
+// fn foobar<T>(arg: T) -> T {
+//     // do something with `arg`
+// }
 
 fn fair_dice_roll_match(feeling_lucky: bool) -> i32 {
     match feeling_lucky {
@@ -49,11 +57,21 @@ struct Vec2 {
     x: f64, // 64-bit floating point, aka "double precision"
     y: f64,
 }
-
+/**
+ * 结构体
+ * struct structName {
+ *   attribute_1: type,
+ *   attribute_2: type
+ * }
+ */
 struct Number {
     odd: bool,
     value: i32,
 }
+/**
+ * 为结构体添加方法
+ * impl StructName {}
+ */
 impl Number {
     fn is_strictly_positive(self) -> bool {
         self.value > 0
