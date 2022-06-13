@@ -1,4 +1,10 @@
 use std::cmp::{min, max};
+/**
+ * 单元类型就是 (),不占用任何内存，也就是0字节
+ * main 函数就返回这个单元类型 ()，你不能说 main 函数无返回值
+ * 
+ * 当用 ! 作函数返回类型的时候，表示该函数永不返回( diverge function )，特别的，这种语法往往用做会导致程序崩溃的函数
+ */
 fn main() {
     println!("1 - 2 = {}", 1i32 - 2);
     let _X: i32 = 42;
@@ -15,6 +21,24 @@ fn main() {
         value: -2,
     };
     println!("positive? {}", minus_two.is_strictly_positive());
+    define_loop();
+}
+//Rust 提供了一个非常简洁的方式，用来生成连续的数值，
+//例如 1..5，生成从 1 到 4 的连续数字，不包含 5 ；
+//1..=5，生成从 1 到 5 的连续数字，包含 5，它的用途很简单，常常用于循环中：
+
+//序列只允许用于数字或字符类型
+//显示返回()单元类型，或者不声明
+fn define_loop() -> (){
+    for i in 0..5 {
+        println!("{}", i);
+    }
+    for i in 0..=5 {
+        println!("{}", i)
+    }
+    for i in 'a'..='z' {
+        println!("{}",i);
+    }
 }
 
 fn greet() {
@@ -28,8 +52,8 @@ fn fair_die_roll() -> i32 {
     return 4;
 }
 /**
- * 函数写法
- * fn methodName(arg: type) -> returnType{}
+ * 函数写法,函数名规范为蛇形命名aa_bb
+ * fn method_name(arg: type) -> returnType{}
  */
 fn fair_dice_roll_if(feeling_lucky: bool) -> i32 {
     if feeling_lucky {
@@ -40,7 +64,7 @@ fn fair_dice_roll_if(feeling_lucky: bool) -> i32 {
 }
 /**
  * 泛型函数
- * fn methodName<T>(arg: T) -> T {}
+ * fn method_name<T>(arg: T) -> T {}
  */
 // fn foobar<T>(arg: T) -> T {
 //     // do something with `arg`
