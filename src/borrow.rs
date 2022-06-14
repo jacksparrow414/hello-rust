@@ -24,6 +24,7 @@
    */
   fn main() {
     let s1 = String::from("hello");
+    // https://course.rs/basic/ownership/ownership.html#%E8%BD%AC%E7%A7%BB%E6%89%80%E6%9C%89%E6%9D%83
     // 字符串深拷贝，调用clone
     let s2 = s1.clone();
 

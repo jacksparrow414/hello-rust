@@ -111,3 +111,29 @@ impl Number {
         self.value > 0
     }
 }
+
+/**
+ * 可以看到，字符串字面量的类型是&str,这里没有显示声明，vscode自动给的提示
+ * 
+ */
+
+fn my_str() {
+    // 告诉编译器忽略未使用的变量，不抛出warning警告
+    #![allow(unused_variables)]
+    let s = "this is string slice";
+    // 声明字符串
+    let mut str = String::from("hello");
+    str.push_str("rust");
+
+    // 使用 + 或者 += 连接字符串，要求右边的参数必须为字符串的切片引用（Slice)类型
+    let string_append = String::from("hello ");
+    let string_rust = String::from("rust");
+    // &string_rust会自动解引用为&str
+    let result = string_append + &string_rust;
+
+
+    // 我们可以使用 String::from 或 to_string 将 &str 转换成 String 类型
+
+    // 新建一个字符串
+    let my_str = String::new();
+}
