@@ -21,6 +21,7 @@ fn main() {
         value: -2,
     };
     println!("positive? {}", minus_two.is_strictly_positive());
+    basic_type();
     define_loop();
 }
 //Rust 提供了一个非常简洁的方式，用来生成连续的数值，
@@ -40,7 +41,16 @@ fn define_loop() -> (){
         println!("{}",i);
     }
 }
-
+/**
+ * Rust 基本类型都是通过【自动拷贝】的方式来赋值的
+ * Rust 有一个叫做 Copy 的特征，可以用在类似整型这样在栈中存储的类型。
+ * 如果一个类型拥有 Copy 特征，一个旧的变量在被赋值给其他变量后仍然可用
+ */
+fn basic_type() {
+    let x = 5;
+    let y = x;
+    println!("{}, {}", x, y);
+}
 fn greet() {
     println!("Hi there!");
 }
