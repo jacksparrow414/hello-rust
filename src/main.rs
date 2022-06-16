@@ -20,6 +20,7 @@ fn main() {
         odd: false,
         value: -2,
     };
+    print_user();
     println!("positive? {}", minus_two.is_strictly_positive());
     basic_type();
     define_loop();
@@ -93,12 +94,66 @@ struct Vec2 {
 }
 /**
  * 结构体
- * struct structName {
+ * #[derive(Debug)] 使用prinln!()打印结构体时需要这一行
+ * struct struct_name {
  *   attribute_1: type,
  *   attribute_2: type
  * }
  */
-struct Number {
+#[derive(Debug)]
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+/**
+ * 初始化实例时，每个字段都需要进行初始化
+ */
+fn build_user() -> User {
+    User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    }
+}
+
+fn print_user() -> () {
+    let user = User {
+        email: String::from("emial"),
+        username: String::from("jack"),
+        active:false,
+        sign_in_count:2,
+    };
+    // 打印结构体
+    println!("user is {:#?}", user)
+}
+/**
+ *  当函数参数和结构体字段同名时，可以直接使用缩略的方式进行初始化
+ *  
+ */
+fn update_user() -> User {
+    let user1 = User {
+        email: String::from("emial"),
+        username: String::from("jack"),
+        active:false,
+        sign_in_count:2,
+    };
+    // 因为 user2 仅仅在 email 上与 user1 不同，因此我们只需要对 email 进行赋值，剩下的通过结构体更新语法 ..user1 即可完成
+    let user2 = User {
+        email: String::from("email2"),
+        // 这里user1.username的所有权被转移给user2，因为其他两个类型是基础类型，自动使用Copy而不是Move
+        ..user1
+    };
+    // 基础类型通过Copy,可以继续使用
+    println!("{}", user1.active);
+    // 所有权已经转移，无法再通过user1访问
+    // println!("{}", user1.username);
+    return user2
+}
+
+ struct Number {
     odd: bool,
     value: i32,
 }
