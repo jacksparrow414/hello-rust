@@ -87,7 +87,13 @@ fn fair_dice_roll_match(feeling_lucky: bool) -> i32 {
         false => 4,
     }
 }
-
+/**
+ * 元组不能过长，超过12就报错了
+ */
+fn my_tuple() {
+    let too_long_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    println!("too long tuple: {:?}", too_long_tuple);
+}
 struct Vec2 {
     x: f64, // 64-bit floating point, aka "double precision"
     y: f64,
