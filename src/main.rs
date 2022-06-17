@@ -159,7 +159,7 @@ fn update_user() -> User {
     return user2
 }
 
- struct Number {
+struct Number {
     odd: bool,
     value: i32,
 }
@@ -170,6 +170,28 @@ fn update_user() -> User {
 impl Number {
     fn is_strictly_positive(self) -> bool {
         self.value > 0
+    }
+}
+#[derive(Debug)]
+struct Rectangle{
+    width: u32,
+    height: u32,
+}
+/**
+ * &self 其实是 self: &Self 的简写（注意大小写）。
+ * 在一个 impl 块内，Self 指代被实现方法的结构体类型，self 指代此类型的实例
+ * 
+ * self 依然有所有权的概念：
+ * self 表示 Rectangle 的所有权转移到该方法中，这种形式用的较少
+ * &self 表示该方法对 Rectangle 的不可变借用
+ * &mut self 表示可变借用
+ */
+impl Rectangle {
+    pub fn new(width: u32, height: u32) -> Self {
+        Rectangle { width, height }
+    }
+    pub fn width(&self) -> u32 {
+        return self.width;
     }
 }
 
