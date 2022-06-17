@@ -212,3 +212,33 @@ fn build_enum() {
     let m2 = Message::Move{x:1,y:1};
     let m3 = Message::ChangeColor(255,255,0);
 }
+/**
+ * 数组元素类型固定，长度固定，因此它存储在栈上
+ * let array_name: [type; size] = [elements...]
+ * 
+ * 在实际开发中，使用最多的是数组切片[T]，我们往往通过引用的方式去使用&[T]，因为后者有固定的类型大小
+ */
+fn build_array() {
+    let a = [1,2,3,4,5];
+    // 5个元素都是3的简单写法
+    let b = [3;5];
+    // 创建数组时可以忽略类型，或者不指定像上面一样
+    let arr: [_; 3] = ['a', 'b', 'c'];
+    // char类型每个字符占4个字节
+    assert!(std::mem::size_of_val(&arr) == 12);
+}
+
+/**
+ * 切片是对字符串或者数组某一部分的引用
+ * 对于字符串而言，切片就是对 String 类型中某一部分的引用
+ * let slice_name = &s[start_index..end_index]
+ * 其中开始索引是切片中第一个元素的索引位置，而终止索引是最后一个元素后面的索引位置
+ */
+fn build_slice() {
+    let s = String::from("hello world");
+    // 创建切片
+    let hello = &s[0..5];
+    let world = &s[6..11];
+
+    
+}
