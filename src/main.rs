@@ -239,6 +239,21 @@ fn build_slice() {
     // 创建切片
     let hello = &s[0..5];
     let world = &s[6..11];
+}
+/**
+ * 可以使用let name = if condition{}
+ */
+fn build_loop() {
+    let condition = true;
+    let number = if condition {
+        5
+    } else {
+        6
+    };
+    println!("The value of number is: {}", number);
 
-    
+    // 无限循环,实际开发中搭配break使用
+    loop {
+        println!("again!");
+    }
 }
