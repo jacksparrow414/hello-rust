@@ -185,8 +185,18 @@ struct Rectangle{
  * self 表示 Rectangle 的所有权转移到该方法中，这种形式用的较少
  * &self 表示该方法对 Rectangle 的不可变借用
  * &mut self 表示可变借用
+ * 
+ * self 会拿走当前结构体实例(调用对象)的所有权，
+ * 而 &self 却只会借用一个不可变引用，
+ * &mut self 会借用一个可变引用
  */
 impl Rectangle {
+    // 定义在 impl 中且没有 self 的函数被称之为关联函数：因为它没有 self，
+    // 不能用 f.read() 的形式调用，因此它是一个函数而不是方法，它又在impl 中，与结构体紧密关联，因此称为关联函数
+    fn new_instance(w: u32, h: u32) -> Rectangle {
+        Rectangle { width: w, height: h }
+    }
+
     pub fn new(width: u32, height: u32) -> Self {
         Rectangle { width, height }
     }
