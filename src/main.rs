@@ -1,4 +1,4 @@
-use std::cmp::{min, max};
+use std::{cmp::{min, max}, fmt::Display};
 /**
  * 单元类型就是 (),不占用任何内存，也就是0字节
  * main 函数就返回这个单元类型 ()，你不能说 main 函数无返回值
@@ -172,6 +172,9 @@ impl Number {
         self.value > 0
     }
 }
+/**
+ * 这种是一种特征派生语法，被 derive 标记的对象会自动实现对应的默认特征代码，继承相应的功能
+ */
 #[derive(Debug)]
 struct Rectangle{
     width: u32,
@@ -289,3 +292,95 @@ fn build_loop() {
         println!("again!");
     }
 }
+/**
+ * 特征类似于接口
+ * trait trait_name {
+ *   method_name(parameters) -> return_type;
+ * }
+ */
+pub trait Summary {
+    fn summarize(&self) -> String;
+    // 类似于Java接口，可以自带默认实现
+    fn summarize_default(&self) -> String {
+        String::from("(Read more...)")
+    }
+}
+pub struct Post {
+    pub title: String, // 标题
+    pub author: String, // 作者
+    pub content: String, // 内容
+}
+/**
+ * 为类型实现特征
+ * imple trait_name for struct_name {
+ *   method_name(parameters) -> return_type {
+ *      impl
+ *   }
+ * }
+ */
+impl Summary for Post {
+    fn summarize(&self) -> String {
+        format!("文章{}, 作者是{}", self.title, self.author)
+    }
+}
+/**
+ * 孤儿原则：如果你想要为类型 A 实现特征 T，那么 A 或者 T 至少有一个是在当前作用域中定义的！
+ * 
+ * 防止代码不会相互破坏。有点类似于Java的双亲委派机制
+ */
+pub struct Weibo {
+    pub username: String,
+    pub content: String
+}
+
+impl Summary for Weibo {
+    fn summarize(&self) -> String {
+        format!("{}发表了微博{}", self.username, self.content)
+    }
+}
+/**
+ * 特征约束.类似于传递Java中接口和泛型，是由实现了Summary特征的struct才可以
+ */
+pub fn notify<T: Summary>(item1: &T, item2: &T) {
+
+}
+/**
+ * 多重约束.参数可以实现多个特征
+ */
+pub fn notify_mutli<T: Summary + Display>(item: &T) {}
+
+/**
+ * 类似于上面的声明，一旦参数多了比较麻烦，看起来也不直观
+ * 可以使用where语法来对参数的特征进行限制
+ */
+fn some_function<T, U>(t: &T, u: &U) -> i32
+    where T: Display + Clone,
+          U: Clone + Debug
+{
+
+}
+/**
+ * 返回类型为特征类型
+ * fn method_name() -> impl trait_name {
+ *   实现了该特征的结构体
+ *   impled_trait_strut {
+ *   }
+ * }
+ * 
+ * 但是这种写法有一个限制是只能返回同一类型的结构体，返回不同类型的不允许。这点就比不了Java的接口了
+ */
+fn returns_summarizable() -> impl Summary {
+    Weibo {
+        username: String::from("sunface"),
+        content: String::from(
+            "m1 max太厉害了，电脑再也不会卡",
+        )
+    }
+}
+
+
+
+
+
+
+
