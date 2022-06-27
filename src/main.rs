@@ -225,6 +225,7 @@ fn my_str() {
     let string_append = String::from("hello ");
     let string_rust = String::from("rust");
     // &string_rust会自动解引用为&str
+    // + 和 += 都是返回一个新的字符串。所以变量声明可以不需要 mut 关键字修饰
     let result = string_append + &string_rust;
 
 
@@ -376,6 +377,33 @@ fn returns_summarizable() -> impl Summary {
             "m1 max太厉害了，电脑再也不会卡",
         )
     }
+}
+/**
+ * 动态数组
+ * let mut v: Vec<type> = Vec::new();
+ * 
+ * 第二种方式
+ * let mut v1 = vec![1,2,3];
+ * 
+ * 访问方式可以通过.get(index)或者[index]
+ * 区别在于当访问越界时,get不会报错，[index]会导致程序报错退出
+ */
+fn build_vector() {
+    let mut v: Vec<i32> = Vec::new();
+    let mut v1 = vec![1,2,3];
+    v.push(1);
+    v.get(0);
+    let rusult = &v1[0];
+
+    // 循环
+    for i in &v {
+        println!("{}", i);
+    }
+    // 循环修改
+    for i in &mut v {
+        *i += 10
+    }
+
 }
 
 
