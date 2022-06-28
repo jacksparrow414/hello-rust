@@ -1,4 +1,4 @@
-use std::{cmp::{min, max}, fmt::Display};
+use std::{cmp::{min, max}, fmt::Display, collections::HashMap};
 /**
  * 单元类型就是 (),不占用任何内存，也就是0字节
  * main 函数就返回这个单元类型 ()，你不能说 main 函数无返回值
@@ -404,6 +404,34 @@ fn build_vector() {
         *i += 10
     }
 
+}
+/**
+ * hashmap
+ * let map_name = HashMap::new();
+ * 
+ * 通过vec迭代创建
+ * let teams_map: HashMap<_,_> = vec.into_iter().collect()
+ */
+fn build_map() {
+    let mut my_map = HashMap::new();
+    my_map.insert("string1", 1);
+
+    let teams_list = vec![
+        ("中国队".to_string(), 100),
+        ("美国队".to_string(), 10),
+        ("日本队".to_string(), 50),
+    ];
+
+    let teams_map: HashMap<_,_> = teams_list.into_iter().collect();
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    let team_name = String::from("Blue");
+    let score: Option<&i32> = scores.get(&team_name);
+    
 }
 
 
