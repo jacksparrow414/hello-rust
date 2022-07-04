@@ -1,4 +1,4 @@
-use std::{cmp::{min, max}, fmt::Display, collections::HashMap};
+use std::{cmp::{min, max}, fmt::Display, collections::HashMap, fs::File, io};
 /**
  * 单元类型就是 (),不占用任何内存，也就是0字节
  * main 函数就返回这个单元类型 ()，你不能说 main 函数无返回值
@@ -432,6 +432,26 @@ fn build_map() {
     let team_name = String::from("Blue");
     let score: Option<&i32> = scores.get(&team_name);
     
+}
+/**
+ * Result<T, E> 用于可恢复错误
+ * panic! 用于不可恢复错误,当调用执行该宏时，程序会打印出一个错误信息，展开报错点往前的函数调用堆栈，最后退出程序
+ * 
+ * 线程 panic 后，程序是否会终止？
+ * 长话短说，如果是 main 线程，则程序会终止，如果是其它子线程，该线程会终止，但是不会影响 main 线程。
+ * 因此，尽量不要在 main 线程中做太多任务，将这些任务交由子线程去做，就算子线程 panic 也不会导致整个程序的结束
+ * 
+ * unwrap 简而言之：成功则返回值，失败则 panic，总之不进行任何错误处理
+ * 
+ * 利用 ? 传播异常
+ */
+fn build_error() -> Result<String, io::Error> {
+    let mut s = String::new();
+
+    // 没有异常就继续
+    File::open("hello.txt")?.read_to_string(&mut s)?;
+
+    Ok(s)
 }
 
 
